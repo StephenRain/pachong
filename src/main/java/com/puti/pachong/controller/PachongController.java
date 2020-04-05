@@ -1,12 +1,10 @@
 package com.puti.pachong.controller;
 
-import com.alibaba.fastjson.JSONObject;
 import com.puti.pachong.entity.Pachong;
 import com.puti.pachong.service.PachongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -31,9 +29,10 @@ public class PachongController {
 
     @RequestMapping("detail/view")
     public Object detail(Integer id){
+        if (id == null) {
+            return new ModelAndView("pachong/detail");
+        }
         Pachong pachong = pachongService.selectById(id);
-        return new ModelAndView("pachong/detail").addObject("pachong",pachong);
+        return new ModelAndView("pachong/detail").addObject("pachong", pachong);
     }
-
-
 }

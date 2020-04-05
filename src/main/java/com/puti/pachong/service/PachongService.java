@@ -33,12 +33,16 @@ public class PachongService {
         Pachong pachong = this.selectById(id);
         String returnResult = "";
         if ("get".equalsIgnoreCase(pachong.getMethod())) {
-            returnResult= httpRestHelper.getString(pachong.getUrl(), new HashMap<>());
+            returnResult = httpRestHelper.getString(pachong.getUrl(), new HashMap<>());
         }
 
         if ("html".equalsIgnoreCase(pachong.getResponseType())) {
-            return resultParser.parseHtml(returnResult,pachong);
+            return resultParser.parseHtml(returnResult, pachong);
         }
         return ResultMsg.success();
+    }
+
+    public void insert(Pachong pachong) {
+        pachongDao.insert(pachong);
     }
 }

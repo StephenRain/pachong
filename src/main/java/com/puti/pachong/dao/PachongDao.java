@@ -1,6 +1,7 @@
 package com.puti.pachong.dao;
 
 import com.puti.pachong.entity.Pachong;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
@@ -16,5 +17,8 @@ public interface PachongDao {
 
     @Select("select * from pachong where id=#{id}")
     Pachong selectById(Integer id);
+
+    @Insert("insert into pachong (url,method,weituofang,responseType,pageExtract,saveType) values(#{url},#{method},#{weituofang},#{responseType},#{pageExtract},#{saveType})")
+    void insert(Pachong pachong);
 
 }

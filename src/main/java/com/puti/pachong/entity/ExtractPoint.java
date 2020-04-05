@@ -22,5 +22,10 @@ public class ExtractPoint {
      */
     private String selector;
 
+    /**
+     * 自定义名称
+     */
+    private String name;
+
 
 }

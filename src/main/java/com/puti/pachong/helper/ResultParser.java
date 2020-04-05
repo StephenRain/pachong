@@ -25,7 +25,7 @@ public class ResultParser {
         if (pageExtract == null) {
             return ResultMsg.paramError("提取对象不能为空");
         }
-        List<ExtractPoint> extractPointList = pageExtract.getExtractPointList();
+        List<ExtractPoint> extractPointList = pageExtract.getPoints();
         if (extractPointList == null) {
             return ResultMsg.paramError("提取对象不能为空");
         }
@@ -34,10 +34,10 @@ public class ResultParser {
             Element element = doc.selectFirst(extractPoint.getSelector());
             if (extractType == 0) {
                 if (pachong.getSaveType() == 0) {
-                    log.info(extractPoint.getSelector() + "抓取结果：" + element.text());
+                    log.info(extractPoint.getName() + "抓取结果：" + element.text());
                 }
             } else if (extractType == 1) {
-                log.info(extractPoint.getSelector() + "抓取结果：" + element.attr(extractPoint.getAttrName()));
+                log.info(extractPoint.getName() + "抓取结果：" + element.attr(extractPoint.getAttrName()));
             }
         }
         return ResultMsg.success();
