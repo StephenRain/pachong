@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>爬虫列表</title>
+    <style type="text/css">
+        table {
+            border: 1px solid black;
+            text-align: center;
+            border-collapse: collapse;
+        }
+        table thead th {
+            border: 1px solid black;
+        }
+        table tbody td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+爬虫列表
+<table>
+    <tr>
+        <td>编号</td>
+        <td>Id</td>
+        <td>url</td>
+        <td>请求方式</td>
+        <td>委托人</td>
+        <td>返回值</td>
+        <td>操作</td>
+    </tr>
+    <tr th:each="pachong,stat:${list}">
+        <td th:text="${stat.count}"></td>
+        <td th:text="${pachong['id']}"></td>
+        <td th:text="${pachong['url']}"></td>
+        <td th:text="${pachong['method']}"></td>
+        <td th:text="${pachong['weituofang']}"></td>
+        <td th:text="${pachong['responseType']}"></td>
+        <td><a href="#">详情</a></td>
+    </tr>
+</table>
+</body>
+</html>
