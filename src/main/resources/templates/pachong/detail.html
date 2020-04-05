@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>爬虫详情页面</title>
+</head>
+<body>
+
+<form>
+
+    <label>id:</label><input id="id" th:value="${pachong.id}"/><br>
+    <label>url:</label><input th:value="${pachong.url}"/><br>
+    <label>method:</label><input th:value="${pachong.method}"/><br>
+    <label>委托方:</label><input th:value="${pachong.weituofang}"/><br>
+    <label>响应类型:</label><input th:value="${pachong.responseType}"/><br>
+    <label>抓取详情:</label><input th:value="${pachong.pageExtract}"/><br>
+    <a id="execute-btn" th:href=@{'/detail/execute?id='+${pachong['id']}}>执行爬虫</a>
+    <br>
+</form>
+<script type="text/javascript">
+
+</script>
+</body>
+</html>

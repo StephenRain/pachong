@@ -14,4 +14,7 @@ public interface PachongDao {
     @Select("select * from pachong")
     List<Pachong> list();
 
+    @Select("select * from pachong where id=#{id}")
+    Pachong selectById(Integer id);
+
 }

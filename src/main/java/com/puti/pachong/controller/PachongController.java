@@ -13,7 +13,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping(value = "admin")
-public class AdminController {
+public class PachongController {
 
     @Autowired
     private PachongService pachongService;
@@ -29,9 +29,11 @@ public class AdminController {
         return new ModelAndView("pachong/list").addObject("list",list);
     }
 
-
-
-
+    @RequestMapping("detail/view")
+    public Object detail(Integer id){
+        Pachong pachong = pachongService.selectById(id);
+        return new ModelAndView("pachong/detail").addObject("pachong",pachong);
+    }
 
 
 }
