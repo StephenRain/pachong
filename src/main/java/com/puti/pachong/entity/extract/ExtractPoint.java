@@ -1,4 +1,4 @@
-package com.puti.pachong.entity;
+package com.puti.pachong.entity.extract;
 
 import lombok.Data;
 
@@ -9,14 +9,7 @@ import lombok.Data;
 public class ExtractPoint {
 
     /**
-     * 提取类型
-     * 0：普通文本
-     * 1：标签的属性
-     */
-    private int extractType;
-
-    /**
-     * 若提取类型为1，提取的属性名称
+     * 提取的属性名称,如果该值存在就取该值，如果不存在说明是普通文本
      */
     private String attrName;
 

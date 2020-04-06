@@ -1,12 +1,12 @@
 package com.puti.pachong.handler;
 
 
-import com.puti.pachong.entity.ExtractPageResult;
-import com.puti.pachong.entity.ExtractPointResult;
-import com.puti.pachong.entity.ExtractUnitResult;
 import com.puti.pachong.entity.Pachong;
 import com.puti.pachong.entity.excel.ExcelSheetPO;
 import com.puti.pachong.entity.excel.ExcelVersion;
+import com.puti.pachong.entity.extract.ExtractPageResult;
+import com.puti.pachong.entity.extract.ExtractPointResult;
+import com.puti.pachong.entity.extract.ExtractUnitResult;
 import com.puti.pachong.util.DateUtil;
 import com.puti.pachong.util.ExcelUtil;
 import lombok.SneakyThrows;
@@ -50,9 +50,8 @@ public class ExtractResultHandler implements Runnable {
         }
         for (ExtractPageResult pageResult : pageResultList) {
             Pachong pachong = pageResult.getPachong();
-            if (pachong.getSaveType() == 1) {
+            if (pachong.getSaveType() == 0) {
                 String filePath = "G://" + DateUtil.nowFormat() + "-" + pachong.getWeituofang() + ".xlsx";
-                //String filePath = "G://aa.xlsx";
                 this.toExcel(pageResultList, filePath, false);
             }
         }

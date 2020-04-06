@@ -1,8 +1,11 @@
 package com.puti.pachong.parser;
 
 import com.alibaba.fastjson.JSON;
-import com.puti.pachong.entity.*;
+import com.puti.pachong.entity.Pachong;
+import com.puti.pachong.entity.ResultMsg;
+import com.puti.pachong.entity.extract.*;
 import com.puti.pachong.handler.ExtractResultHandler;
+import io.micrometer.core.instrument.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -31,27 +34,21 @@ public class ExtractResultParser {
         }
         ExtractPageResult extractPageResult = new ExtractPageResult();
         extractPageResult.setPachong(pachong);
-        ExtractPointResult extractPointResult = new ExtractPointResult();
         ExtractUnitResult unitResult = new ExtractUnitResult();
         List<ExtractPoint> pointList = extractUnit.getPoints();
         for (ExtractPoint extractPoint : pointList) {
-            int extractType = extractPoint.getExtractType();
+            ExtractPointResult extractPointResult = new ExtractPointResult();
             Element element = doc.selectFirst(extractPoint.getSelector());
-            if (extractType == 0) {
+            if (StringUtils.isEmpty(extractPoint.getAttrName())) {
                 if (pachong.getSaveType() == 0) {
-                    log.info(extractPoint.getName() + "抓取结果：" + element.text());
-                } else if (pachong.getSaveType() == 1) {
+                    log.info("【" + extractPoint.getName() + "】" + "==抓取==>" + element.text());
                     extractPointResult.setName(extractPoint.getName());
                     extractPointResult.setValue(element.text());
                     unitResult.addPointResult(extractPointResult);
-                    extractPageResult.addUnitResult(unitResult);
-
                 }
-            } else if (extractType == 1) {
-                log.info(extractPoint.getName() + "抓取结果：" + element.attr(extractPoint.getAttrName()));
             }
         }
-
+        extractPageResult.addUnitResult(unitResult);
         // 将解析结果给处理器
         resultHandler.addExtractResult(extractPageResult);
         // 启动处理器

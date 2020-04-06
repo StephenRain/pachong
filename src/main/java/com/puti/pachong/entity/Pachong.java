@@ -13,8 +13,7 @@ public class Pachong {
     private String extractUnit;
     /**
      * 爬取的结果 保存方式
-     * 0：打印
-     * 1：EXCEL
+     * 0：EXCEL
      */
     private Integer saveType;
 

@@ -1,5 +1,6 @@
-package com.puti.pachong.entity;
+package com.puti.pachong.entity.extract;
 
+import com.puti.pachong.entity.Pachong;
 import lombok.Data;
 
 import java.util.LinkedList;

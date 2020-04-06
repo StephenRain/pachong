@@ -1,4 +1,4 @@
-package com.puti.pachong.entity;
+package com.puti.pachong.entity.extract;
 
 import lombok.Data;
 
