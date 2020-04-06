@@ -8,14 +8,16 @@
 <!--详情/更新页-->
 <div th:if="${pachong!=null}">
     详情/更新页
-    <form>
-        <label>id:</label><input id="id" th:value="${pachong.id}"/><br>
-        <label>url:</label><input th:value="${pachong.url}"/><br>
-        <label>method:</label><input th:value="${pachong.method}"/><br>
-        <label>委托方:</label><input th:value="${pachong.weituofang}"/><br>
-        <label>响应类型:</label><input th:value="${pachong.responseType}"/><br>
-        <label>抓取点:</label><textarea th:text="${pachong.extractUnit}"></textarea><br>
+    <form action="/detail/save">
+        <label>id:</label><input id="id" name="id" th:value="${pachong.id}"/><br>
+        <label>url:</label><input th:name="url" th:value="${pachong.url}"/><br>
+        <label>method:</label><input th:name="method" th:value="${pachong.method}"/><br>
+        <label>委托方:</label><input name="weituofang" th:value="${pachong.weituofang}"/><br>
+        <label>响应类型:</label><input name="responseType" th:value="${pachong.responseType}"/><br>
+        <label>保存方式:</label><input name="saveType" th:value="${pachong.saveType}"/><br>
+        <label>抓取点:</label><textarea name="extractUnit" th:text="${pachong.extractUnit}"></textarea><br>
         <a id="execute-btn" th:href=@{'/detail/execute?id='+${pachong['id']}}>执行爬虫</a>
+        <input type="submit" value="保存"></input>
         <br>
     </form>
 </div>
@@ -23,13 +25,14 @@
 <!--插入页面-->
 <div th:if="${pachong==null}">
     插入页面
-    <form>
-        <label>id:</label><input name="id"/><br>
+    <form action="/detail/save">
         <label>url:</label><input name="url"/><br>
         <label>method:</label><input name="method"/><br>
         <label>委托方:</label><input name="weituofang"/><br>
         <label>响应类型:</label><input name="responseType"/><br>
+        <label>保存方式:</label><input name="saveType"/><br>
         <label>抓取点:</label><textarea name="extractUnit"></textarea><br>
+        <input type="submit" value="保存"></input>
         <br>
     </form>
 </div>

@@ -42,7 +42,12 @@ public class PachongService {
         return ResultMsg.success();
     }
 
-    public void insert(Pachong pachong) {
+    public boolean insert(Pachong pachong) {
         pachongDao.insert(pachong);
+        return true;
+    }
+
+    public void update(Pachong pachong) {
+        pachongDao.update(pachong);
     }
 }

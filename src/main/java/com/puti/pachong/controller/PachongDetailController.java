@@ -1,5 +1,7 @@
 package com.puti.pachong.controller;
 
+import com.puti.pachong.entity.Pachong;
+import com.puti.pachong.entity.ResultMsg;
 import com.puti.pachong.service.PachongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,8 +17,22 @@ public class PachongDetailController {
 
     @ResponseBody
     @RequestMapping("execute")
-    public Object execute(Integer id){
+    public Object execute(Integer id) {
         return pachongService.execute(id);
+    }
+
+    @RequestMapping("save")
+    @ResponseBody
+    public Object save(Pachong pachong) {
+        if (pachong == null) {
+            return ResultMsg.paramError("参数不能为空");
+        }
+        if (pachong.getId() == null) {
+            pachongService.insert(pachong);
+        } else {
+            pachongService.update(pachong);
+        }
+        return ResultMsg.success();
     }
 
 }

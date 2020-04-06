@@ -7,6 +7,7 @@ import com.puti.pachong.entity.ExtractUnitResult;
 import com.puti.pachong.entity.Pachong;
 import com.puti.pachong.entity.excel.ExcelSheetPO;
 import com.puti.pachong.entity.excel.ExcelVersion;
+import com.puti.pachong.util.DateUtil;
 import com.puti.pachong.util.ExcelUtil;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -50,8 +51,8 @@ public class ExtractResultHandler implements Runnable {
         for (ExtractPageResult pageResult : pageResultList) {
             Pachong pachong = pageResult.getPachong();
             if (pachong.getSaveType() == 1) {
-                //String filePath = File.separator + (StringUtils.isEmpty(pachong.getWeituofang()) ? "自营" : pachong.getWeituofang()) + "-" + DateUtil.nowFormat() + ".xlsx";
-                String filePath = "G://aa.xlsx";
+                String filePath = "G://" + DateUtil.nowFormat() + "-" + pachong.getWeituofang() + ".xlsx";
+                //String filePath = "G://aa.xlsx";
                 this.toExcel(pageResultList, filePath, false);
             }
         }
