@@ -15,6 +15,9 @@ public class ExtractPoint {
 
     /**
      * 选择器表达式
+     * 可以为实际的表达式，也可以为模板表达式
+     * 实际表达式只能选择唯一的一个标签元素
+     * 模板表达式是可以替换其中某些值的，用来选取一类标签
      */
     private String selector;
 
