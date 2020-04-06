@@ -10,7 +10,7 @@ public class Pachong {
     private String method;
     private String weituofang;
     private String responseType;
-    private String pageExtract;
+    private String extractUnit;
     /**
      * 爬取的结果 保存方式
      * 0：打印

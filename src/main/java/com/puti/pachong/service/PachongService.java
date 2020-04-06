@@ -4,7 +4,7 @@ import com.puti.pachong.dao.PachongDao;
 import com.puti.pachong.entity.Pachong;
 import com.puti.pachong.entity.ResultMsg;
 import com.puti.pachong.helper.HttpRestHelper;
-import com.puti.pachong.helper.ResultParser;
+import com.puti.pachong.parser.ExtractResultParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +19,7 @@ public class PachongService {
     @Autowired
     private HttpRestHelper httpRestHelper;
     @Autowired
-    private ResultParser resultParser;
+    private ExtractResultParser extractResultParser;
 
     public List<Pachong> list(){
         return pachongDao.list();
@@ -37,7 +37,7 @@ public class PachongService {
         }
 
         if ("html".equalsIgnoreCase(pachong.getResponseType())) {
-            return resultParser.parseHtml(returnResult, pachong);
+            return extractResultParser.parseHtml(returnResult, pachong);
         }
         return ResultMsg.success();
     }

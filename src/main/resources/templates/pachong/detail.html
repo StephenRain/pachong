@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>爬虫插入/修改页面</title>
@@ -14,7 +14,7 @@
         <label>method:</label><input th:value="${pachong.method}"/><br>
         <label>委托方:</label><input th:value="${pachong.weituofang}"/><br>
         <label>响应类型:</label><input th:value="${pachong.responseType}"/><br>
-        <label>抓取点:</label><input th:value="${pachong.pageExtract}"/><br>
+        <label>抓取点:</label><textarea th:text="${pachong.extractUnit}"></textarea><br>
         <a id="execute-btn" th:href=@{'/detail/execute?id='+${pachong['id']}}>执行爬虫</a>
         <br>
     </form>
@@ -29,7 +29,7 @@
         <label>method:</label><input name="method"/><br>
         <label>委托方:</label><input name="weituofang"/><br>
         <label>响应类型:</label><input name="responseType"/><br>
-        <label>抓取点:</label><textarea name="pageExtract"></textarea><br>
+        <label>抓取点:</label><textarea name="extractUnit"></textarea><br>
         <br>
     </form>
 </div>

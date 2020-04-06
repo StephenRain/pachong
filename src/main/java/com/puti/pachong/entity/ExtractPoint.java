@@ -2,6 +2,9 @@ package com.puti.pachong.entity;
 
 import lombok.Data;
 
+/**
+ * 被抓去页面的一个点，比如一个A标签
+ */
 @Data
 public class ExtractPoint {
 
