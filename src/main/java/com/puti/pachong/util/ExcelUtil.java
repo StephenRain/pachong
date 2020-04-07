@@ -55,10 +55,12 @@ public class ExcelUtil {
         HSSFCell cell = null;
 
         //创建标题
-        for (int i = 0; i < title.length; i++) {
-            cell = row.createCell(i + startColIdx);
-            cell.setCellValue(title[i]);
-            cell.setCellStyle(style);
+        if (title != null) {
+            for (int i = 0; i < title.length; i++) {
+                cell = row.createCell(i + startColIdx);
+                cell.setCellValue(title[i]);
+                cell.setCellStyle(style);
+            }
         }
         //创建内容
         for (int i = 0; i < values.length; i++) {

@@ -28,6 +28,7 @@ public class ExtractResultParser {
 
 
     public ResultMsg parseHtml(String html, Pachong pachong) {
+        log.info("HTML解析器正在解析");
         Document doc = Jsoup.parse(html);
         ExtractUnit extractUnit = JSON.parseObject(pachong.getExtractUnit(), ExtractUnit.class);
         if (extractUnit == null) {

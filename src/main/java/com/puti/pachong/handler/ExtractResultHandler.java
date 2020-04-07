@@ -37,7 +37,7 @@ public class ExtractResultHandler implements Runnable {
 
     @SneakyThrows
     public void handle() {
-        log.info("处理器已启动");
+        log.info("抓取结果处理器已启动");
         List<ExtractPageResult> pageResultList = new LinkedList<>();
         while (!extractPageResultChannel.isEmpty()) {
             ExtractPageResult extractPageResult = extractPageResultChannel.poll(10, TimeUnit.SECONDS);
@@ -52,7 +52,7 @@ public class ExtractResultHandler implements Runnable {
                 this.toExcel(pageResultList, filePath, false);
             }
         }
-        log.info("处理器已结束");
+        log.info("抓取结果处理器已结束");
     }
 
     @SneakyThrows

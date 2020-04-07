@@ -15,15 +15,17 @@
         <label>委托方:</label><input name="weituofang" th:value="${pachong.weituofang}"/><br>
         <label>响应类型:</label><input name="responseType" th:value="${pachong.responseType}"/><br>
         <label>保存方式:</label><input name="saveType" th:value="${pachong.saveType}"/><br>
-        <label>抓取单元:</label><textarea name="extractUnit" th:text="${pachong.extractUnit}"></textarea><br>
-        <div class="extract-unit">
-            <label>名称:</label><input type="text"/>
-            <label>选择器语法:</label><input type="text"/>
-            <label>是否是文本:</label><input type="text"/>
-            <label>属性名称:</label><input type="text"/>
+        <label>抓取单元:</label><input class="extractUnit" name="extractUnit" th:value="${pachong.extractUnit}"/><br>
+        <div class="points">
+            <div class="extract-point">
+                <label>名称:</label><input class="name" type="text"/>
+                <label>选择器语法:</label><input class="selector" type="text"/>
+                <label>提取属性名称:</label><input class="attrName" type="text"/>
+                <button class="add-btn" onclick="addPoint();return false;">继续添加</button>
+            </div>
         </div>
         <a id="execute-btn" th:href=@{'/detail/execute?id='+${pachong['id']}}>执行爬虫</a>
-        <input type="submit" value="保存"/>
+        <input onclick="preSave();" type="submit" value="保存"/>
         <br>
     </form>
 </div>
@@ -42,8 +44,7 @@
             <div class="extract-point">
                 <label>名称:</label><input class="name" type="text"/>
                 <label>选择器语法:</label><input class="selector" type="text"/>
-                <label>是否是文本:</label><input class="labelType" type="text"/>
-                <label>属性名称:</label><input class="attrName" type="text"/>
+                <label>提取属性名称:</label><input class="attrName" type="text"/>
                 <button class="add-btn" onclick="addPoint();return false;">继续添加</button>
             </div>
         </div>
@@ -52,6 +53,27 @@
     </form>
 </div>
 <script type="text/javascript">
+    let extractUnitNode = document.getElementsByClassName("extractUnit")[0];
+    let extractUnit = extractUnitNode.value;
+    if (extractUnit != "") {
+        let unitJson = JSON.parse(extractUnit);
+        let points = unitJson['points'];
+        console.log(points);
+        for (let i = 0; i < points.length; i++) {
+            console.log(" sdafsd" + points[i]["name"]);
+            if (i != points.length - 1) {
+                let cloeNode = document.getElementsByClassName("extract-point")[0].cloneNode(true);
+                document.getElementsByClassName("points")[0].appendChild(cloeNode);
+            }
+            let extract_point = document.getElementsByClassName("extract-point")[i];
+
+            extract_point.getElementsByClassName("name")[0].value = points[i]["name"];
+            extract_point.getElementsByClassName("selector")[0].value = points[i]["selector"];
+            extract_point.getElementsByClassName("attrName")[0].value = points[i]["attrName"];
+        }
+
+    }
+
     function preSave() {
         let extract_points = document.getElementsByClassName("extract-point");
         let points = [];
@@ -59,12 +81,10 @@
             let point = document.getElementsByClassName("extract-point")[i];
             let name = point.getElementsByClassName("name")[0].value;
             let selector = point.getElementsByClassName("selector")[0].value;
-            let labelType = point.getElementsByClassName("labelType")[0].value;
             let attrName = point.getElementsByClassName("attrName")[0].value;
             var pointJson = {
                 name: name,
                 selector: selector,
-                labelType: labelType,
                 attrName: attrName
             };
             points[i] = pointJson;
