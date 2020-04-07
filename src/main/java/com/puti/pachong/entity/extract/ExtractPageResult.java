@@ -12,6 +12,8 @@ public class ExtractPageResult {
 
     private Pachong pachong;
 
+    //当前第几页
+    private Integer currPage;
 
     private List<ExtractUnitResult> unitResultList;
 
