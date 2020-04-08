@@ -1,0 +1,13 @@
+:authority: msg.taobao.com
+:method: GET
+:path: /json/hover_message.htm?t=1586345010966&_input_charset=utf-8&_ksTS=1586345010967_1379&callback=jsonp1380
+:scheme: https
+accept: */*
+accept-encoding: gzip, deflate, br
+accept-language: zh-CN,zh;q=0.9
+cookie: t=4202f32af17a0e749e0718ecf0c5bd45; cna=I6wQF9EVEHMCAdzPVyBTJjOZ; thw=cn; uc3=lg2=VFC%2FuZ9ayeYq2g%3D%3D&vt3=F8dBxdAaUClLbBJtgIk%3D&nk2=rPSzTX95QQ%3D%3D&id2=UonbZwGl8%2B2jMA%3D%3D; lgc=%5Cu6653%5Cu5357522; uc4=nk4=0%40rtrPox27adCbbpNj938byCYx&id4=0%40UOExMVr5lSKDqFfSsOOpWCjU0c4H; tracknick=%5Cu6653%5Cu5357522; _cc_=VT5L2FSpdA%3D%3D; tg=0; mt=ci=17_1; _m_h5_tk=3201194bf1e56c9dae1da7a1190b56df_1586346992997; _m_h5_tk_enc=c6f0135dee6e502452299e459a82be7b; cookie2=1c16028b1f309fa4dfd390db4c5f07af; _tb_token_=597b8fbed35ee; _samesite_flag_=true; v=0; tfstk=cjU5B3c8wLv7Z7vKl81q430yyUgdCTdsOgMuNoI5y_OhEEBq3e1DkFksgQqHpEntG; l=dBjwIP77QmrtAGYjBOfNR7xnsS_92QRfCsPrqgmemICP_S56lc_PWZfI5wYBCnGV3sZy835mgkfgB4T3DyUQ5__Ox6HpikEBydYBR; isg=BHt7CoTboQ_NJp26aOyslqmvCl_l0I_Sd2Uf7m065HrRzJ6u9qFVIh_C5myCbOfK
+referer: https://uland.taobao.com/sem/tbsearch?refpid=mm_26632258_3504122_32538762&keyword=%E5%A5%B3%E8%A3%85&clk1=f7659cf2a5a4b7192562be9245d20e2e&upsid=f7659cf2a5a4b7192562be9245d20e2e
+sec-fetch-dest: script
+sec-fetch-mode: no-cors
+sec-fetch-site: same-site
+user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36

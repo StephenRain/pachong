@@ -6,6 +6,7 @@ import com.puti.pachong.service.PachongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping(value = "detail",produces = "application/json; charset=utf-8")
@@ -14,10 +15,11 @@ public class PachongDetailController {
     @Autowired
     private PachongService pachongService;
 
+    @ResponseBody
     @RequestMapping("execute")
     public Object execute(Integer id) {
-        pachongService.execute(id);
-        return "redirect:/admin/list/view";
+        return pachongService.execute(id);
+        //return "redirect:/admin/list/view";
     }
 
     @RequestMapping("save")
@@ -26,9 +28,9 @@ public class PachongDetailController {
             return ResultMsg.paramError("参数不能为空");
         }
         if (pachong.getId() == null) {
-            pachongService.insert(pachong);
+            pachongService.insert(pachong.defaultVal());
         } else {
-            pachongService.update(pachong);
+            pachongService.update(pachong.defaultVal());
         }
         return "redirect:/admin/list/view";
     }

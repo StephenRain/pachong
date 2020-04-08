@@ -4,6 +4,7 @@ import com.puti.pachong.entity.Pachong;
 import lombok.Data;
 
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -19,13 +20,7 @@ public class ExtractPagination {
     private String urlTemplate;
 
     // 当前分页爬取所有的url
-    private List<String> urlList;
-
-    // 当前正在爬取的url
-    private String currentUrl;
-
-    // 当前爬取到的页面数据
-    private String extractValue;
+    private List<String> realUrlList = new LinkedList<>();
 
     /**
      * key：实际爬取的url

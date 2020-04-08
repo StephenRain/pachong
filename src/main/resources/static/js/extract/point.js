@@ -60,3 +60,8 @@ var x = {
 
 };
 
+var x = "body > div > div.user-container.pc-container > div.display-zone > div.note-wrapper > div > div > div:nth-child(${1-3}}) > div:nth-child(${1-4}}) > div.note-info > div > div > div > img";
+var b = "body > div > div.user-container.pc-container > div.display-zone > div.note-wrapper > div > div > div:nth-child(2) > div:nth-child(1) > div.note-info > div > div > div > img";
+var e = "body > div > div.user-container.pc-container > div.display-zone > div.note-wrapper > div > div > div:nth-child(4) > div:nth-child(3) > div.note-info > div > div > div > img";
+var f = "body > div > div.user-container.pc-container > div.display-zone > div.note-wrapper > div > div > div:nth-child(3) > div:nth-child(3) > div.note-info > div > div > div > img";
+var lk = "body > div > div.user-container.pc-container > div.display-zone > div.note-wrapper > div > div > div:nth-child(3) > div:nth-child(2) > div.note-info > div > div > div > img";

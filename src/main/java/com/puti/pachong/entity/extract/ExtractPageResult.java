@@ -1,6 +1,5 @@
 package com.puti.pachong.entity.extract;
 
-import com.puti.pachong.entity.Pachong;
 import lombok.Data;
 
 import java.util.LinkedList;
@@ -10,7 +9,7 @@ import java.util.List;
 public class ExtractPageResult {
 
 
-    private Pachong pachong;
+    //private Pachong pachong;
 
     //当前第几页
     private Integer currPage;

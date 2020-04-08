@@ -38,7 +38,6 @@ public class HtmlParser extends ExtractResultParser {
             }
             ExtractPageResult extractPageResult = new ExtractPageResult();
             paginationResult.addPageResult(extractPageResult);
-            extractPageResult.setPachong(pachong);
             extractPageResult.setCurrPage(currPage);
             List<ExtractPoint> pointList = extractUnit.getPoints();
             Map<List<String>, ExtractPoint> pointSelectorMap = new HashMap<>();
@@ -71,15 +70,20 @@ public class HtmlParser extends ExtractResultParser {
                 ExtractPoint extractPoint = pointSelectorMap.get(pointSelectorMap.keySet().stream().filter((list) -> list.contains(realSelector)).findFirst().orElse(Collections.emptyList()));
                 ExtractPointResult extractPointResult = new ExtractPointResult();
                 Element element = doc.selectFirst(realSelector);
-                String extractVal = element == null ? "空值" : element.text();
-                if (StringUtils.isEmpty(extractPoint.getAttrName())) {
-                    if (pachong.getSaveType() == 0) {
-                        log.info("【" + extractPoint.getName() + "】" + "==解析==>" + extractVal);
-                        extractPointResult.setName(extractPoint.getName());
-                        extractPointResult.setValue(extractVal);
-                        unitResult.addPointResult(extractPointResult);
+                String extractVal;
+                if (element == null) {
+                    extractVal = "空值";
+                } else {
+                    if (!StringUtils.isEmpty(extractPoint.getAttrName())) {
+                        extractVal = element.attr(extractPoint.getAttrName());
+                    } else {
+                        extractVal = element.text();
                     }
                 }
+                log.info("【" + extractPoint.getName() + "】" + "==解析==>" + extractVal);
+                extractPointResult.setName(extractPoint.getName());
+                extractPointResult.setValue(extractVal);
+                unitResult.addPointResult(extractPointResult);
             }
         }
         log.info("HTML解析器-结束");
