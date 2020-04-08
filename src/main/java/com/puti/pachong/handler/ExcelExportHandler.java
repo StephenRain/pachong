@@ -5,6 +5,7 @@ import com.puti.pachong.entity.extract.ExtractPageResult;
 import com.puti.pachong.entity.extract.ExtractPointResult;
 import com.puti.pachong.entity.extract.ExtractUnitResult;
 import com.puti.pachong.entity.extract.PaginationResult;
+import com.puti.pachong.util.DateUtil;
 import com.puti.pachong.util.ExcelUtil;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +22,9 @@ public class ExcelExportHandler extends ResultExportHandler {
 
 
     @SneakyThrows
-    public void handle(PaginationResult paginationResult, String filePath) {
+    @Override
+    public void handle(PaginationResult paginationResult) {
+        String filePath = "G://" + DateUtil.nowFormat() + "-" + paginationResult.getPachong().getWeituofang() + ".xls";
         List<ExtractPageResult> pageResultList = paginationResult.getPageResultList();
         if (CollectionUtils.isNotEmpty(pageResultList)) {
             List<List<String>> dataList = new LinkedList<>();

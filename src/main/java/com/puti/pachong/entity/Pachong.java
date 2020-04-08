@@ -20,7 +20,7 @@ public class Pachong {
      * 爬取的结果 保存方式
      * 0：EXCEL
      */
-    private Integer saveType = 0;
+    private int saveType = 0;
     /**
      * 请求头信息
      * 格式:从浏览器中直接拷贝的请求头的格式
@@ -45,9 +45,6 @@ public class Pachong {
         }
         if (this.getExtractUnit() == null) {
             this.setExtractUnit("");
-        }
-        if (this.getSaveType() == null) {
-            this.setSaveType(0);
         }
         return this;
     }

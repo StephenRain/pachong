@@ -8,7 +8,9 @@ import com.puti.pachong.entity.extract.ExtractPagination;
 import com.puti.pachong.entity.extract.ExtractUnit;
 import com.puti.pachong.entity.extract.PaginationResult;
 import com.puti.pachong.entity.http.HttpRequest;
+import com.puti.pachong.handler.ExcelExportHandler;
 import com.puti.pachong.handler.ResultExportHandler;
+import com.puti.pachong.handler.TextFileExportHandler;
 import com.puti.pachong.http.HttpRequester;
 import com.puti.pachong.parser.HtmlParser;
 import com.puti.pachong.parser.ParserFactory;
@@ -31,9 +33,6 @@ public class PachongService {
     @Autowired
     @Qualifier("httpRestRequest")
     private HttpRequester httpRequester;
-    @Autowired
-    @Qualifier("resultExportHandler")
-    private ResultExportHandler resultHandler;
 
     public List<Pachong> list() {
         return pachongDao.list();
@@ -75,9 +74,16 @@ public class PachongService {
             return ResultMsg.success(pagination);
         }
         PaginationResult paginationResult = parser.parse(pagination);
-        resultHandler.addExtractResult(paginationResult);
-        // 启动处理器
-        new Thread(resultHandler).start();
+
+        ResultExportHandler resultExportHandler;
+        if (pachong.getSaveType() == 0) {
+            resultExportHandler = new ExcelExportHandler();
+        } else {
+            resultExportHandler = new TextFileExportHandler();
+        }
+
+        resultExportHandler.addExtractResult(paginationResult);
+        resultExportHandler.handle();
         return ResultMsg.success(paginationResult);
     }
 
