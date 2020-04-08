@@ -8,9 +8,6 @@ import java.util.List;
 @Data
 public class ExtractPageResult {
 
-
-    //private Pachong pachong;
-
     //当前第几页
     private Integer currPage;
 

@@ -11,3 +11,13 @@ sec-fetch-dest: script
 sec-fetch-mode: no-cors
 sec-fetch-site: same-site
 user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
+
+
+#ip_list > tbody > tr:nth-child(2) > td:nth-child(2)
+#ip_list > tbody > tr:nth-child(2) > td:nth-child(3)
+
+#ip_list > tbody > tr:nth-child(3) > td:nth-child(2)
+#ip_list > tbody > tr:nth-child(3) > td:nth-child(3)
+
+#ip_list > tbody > tr:nth-child(101) > td:nth-child(2)
+#ip_list > tbody > tr:nth-child(101) > td:nth-child(3)

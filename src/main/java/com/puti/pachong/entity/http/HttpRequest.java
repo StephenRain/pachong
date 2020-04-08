@@ -1,5 +1,6 @@
 package com.puti.pachong.entity.http;
 
+import com.puti.pachong.entity.proxy.FreeProxy;
 import lombok.Data;
 import org.springframework.http.HttpMethod;
 
@@ -28,6 +29,11 @@ public class HttpRequest {
     protected Map<String, String> headers = new HashMap<>(16);
 
     protected Map<String, String> body = new HashMap<>(16);
+
+    // 免费代理 如果不为空，就用代理
+    private FreeProxy freeProxy;
+    private int connectTimeOut;
+    private int readTimeOut;
 
     public static HttpRequest defaultGetRequest(String url, Map<String, String> headers) {
         HttpRequest httpRequest = new HttpRequest();

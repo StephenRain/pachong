@@ -1,4 +1,4 @@
-package com.puti.pachong.helper;
+package com.puti.pachong.http;
 
 import com.puti.pachong.entity.http.HttpRequest;
 

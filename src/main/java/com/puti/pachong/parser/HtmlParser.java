@@ -31,11 +31,15 @@ public class HtmlParser extends ExtractResultParser {
             currPage++;
             log.info("HTML解析器-正在解析:" + originUrl);
             String extractValue = urlToExtractVal.get(originUrl);
-            Document doc = Jsoup.parse(extractValue);
+            if (StringUtils.isEmpty(extractValue)) {
+                continue;
+            }
             ExtractUnit extractUnit = JSON.parseObject(pachong.getExtractUnit(), ExtractUnit.class);
+            // 如果爬取单元为空，表示不用解析
             if (extractUnit == null) {
                 return PaginationResult.error("抓取单元不能为空");
             }
+            Document doc = Jsoup.parse(extractValue);
             ExtractPageResult extractPageResult = new ExtractPageResult();
             paginationResult.addPageResult(extractPageResult);
             extractPageResult.setCurrPage(currPage);
