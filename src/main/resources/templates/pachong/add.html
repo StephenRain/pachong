@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
+    <script th:src="@{/layui/layui.js}"></script>
+    <script th:src="@{/js/function.js}"></script>
+    <title>添加数据采集</title>
+</head>
+<body>
+
+<form action="/detail/save" class="layui-form">
+    <input id="id" name="id" type="hidden"/>
+    <div class="layui-form-item">
+        <label class="layui-form-label">目标网站</label>
+        <div class="layui-input-block">
+            <input class="layui-input" name="targetSiteName"/>
+        </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">URL模板</label>
+        <div class="layui-input-block">
+            <textarea class="layui-textarea" name="url" placeholder="采集目标网页的URL地址,支持模板语法${}"></textarea>
+        </div>
+    </div>
+
+    <!--        <div class="layui-form-item">
+                <label class="layui-form-label">请求方式</label>
+                <div class="layui-input-block">
+                    <input th:name="method" th:value="${pachong.method}" class="layui-input"/>
+                </div>
+            </div>-->
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">请求头</label>
+        <div class="layui-input-block">
+            <textarea class="layui-textarea" name="headers"></textarea>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">代理IP</label>
+        <div class="layui-input-block">
+            <input class="layui-input" name="proxyFilePath"/>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">保存方式</label>
+        <div class="layui-input-block">
+            <input class="layui-input" name="saveType"/>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">抓取内容</label>
+        <div class="layui-input-block">
+            <input class="extractUnit" name="extractUnit" type="hidden"/>
+        </div>
+    </div>
+    <div class="points layui-form-item">
+        <div class="extract-point">
+            <div class="layui-inlin">
+                <label class="layui-form-label">名称:</label>
+                <div class="layui-input-inline">
+                    <input class="name layui-input" type="text"/>
+                </div>
+
+                <label class="layui-form-label">选择器语法:</label>
+                <div class="layui-input-inline">
+                    <input class="selector layui-input" type="text"></input>
+                </div>
+
+                <label class="layui-form-label">提取属性名:</label>
+                <div class="layui-input-inline">
+                    <input class="attrName layui-input" type="text" width="200px"></input>
+                </div>
+                <div class="layui-inline">
+                    <button class="add-btn layui-btn" onclick="addPoint();return false;">继续添加</button>
+                    <button class="remove-btn layui-btn" onclick="removePoint(this);return false;">删除</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-inline">
+        <input class="layui-btn" onclick="preSave();" type="submit" value="保存"/>
+    </div>
+    <br>
+</form>
+</body>
+</html>

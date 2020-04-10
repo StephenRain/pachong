@@ -12,15 +12,30 @@ public class Pachong {
 
     private Integer id;
     private String url = "";
+    // URL的省略，只显示前30个字符
+    private String urlSmall = "";
     private String method = "GET";
-    private String weituofang = "自营";
+    private String targetSiteName = "";
     private String responseType = "HTML";
     private String extractUnit = "";
     /**
+     * 0: 刚创建
+     * 1：正在采集
+     * 2：采集完成
+     * 3：采集失败
+     */
+    private int status;
+    /**
      * 爬取的结果 保存方式
      * 0：EXCEL
+     * 1：TXT 文件
      */
     private int saveType = 0;
+
+    /**
+     * 采集结果保存位置
+     */
+    private String resultPath;
     /**
      * 请求头信息
      * 格式:从浏览器中直接拷贝的请求头的格式
@@ -43,8 +58,8 @@ public class Pachong {
         if (StringUtils.isEmpty(this.getMethod())) {
             this.setMethod("GET");
         }
-        if (StringUtils.isEmpty(this.getWeituofang())) {
-            this.setWeituofang("自营");
+        if (StringUtils.isEmpty(this.getTargetSiteName())) {
+            this.setTargetSiteName("自营");
         }
         if (StringUtils.isEmpty(this.getResponseType())) {
             this.setResponseType("HTML");

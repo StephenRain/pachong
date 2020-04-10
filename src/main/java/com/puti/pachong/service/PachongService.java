@@ -16,6 +16,7 @@ import com.puti.pachong.http.HttpRequester;
 import com.puti.pachong.parser.HtmlParser;
 import com.puti.pachong.parser.ParserFactory;
 import com.puti.pachong.util.ProxyUtil;
+import com.puti.pachong.util.SpringUtil;
 import com.puti.pachong.util.TemplateUtil;
 import io.micrometer.core.instrument.util.StringUtils;
 import lombok.SneakyThrows;
@@ -53,6 +54,12 @@ public class PachongService {
     @SneakyThrows
     public ResultMsg execute(Integer id) {
         Pachong pachong = this.selectById(id);
+        if (pachong.getStatus() == 1) {
+            log.info("正在采集数据,稍后再试");
+            return ResultMsg.paramError("正在采集数据");
+        }
+        pachong.setStatus(1);
+        pachongDao.update(pachong);
 
         ExtractPagination pagination = new ExtractPagination();
         pagination.setPachong(pachong);
@@ -84,15 +91,17 @@ public class PachongService {
 
         ResultExportHandler resultExportHandler;
         if (pachong.getSaveType() == 0) {
-            resultExportHandler = new ExcelExportHandler();
+            resultExportHandler = SpringUtil.getBean(ExcelExportHandler.class);
         } else {
-            resultExportHandler = new TextFileExportHandler();
+            resultExportHandler = SpringUtil.getBean(TextFileExportHandler.class);
         }
         if (!paginationResult.isSuccess()) {
             return ResultMsg.error(paginationResult);
         }
         resultExportHandler.addExtractResult(paginationResult);
         resultExportHandler.handle();
+        pachong.setStatus(2);
+        pachongDao.update(pachong);
         return ResultMsg.success(paginationResult);
     }
 
@@ -131,5 +140,9 @@ public class PachongService {
             }).collect(Collectors.toList());
             List<FreeProxy> freeProxies = ProxyUtil.aliveProxyList(freeProxyList);
         }
+    }
+
+    public int delete(Integer id) {
+        return pachongDao.delete(id);
     }
 }

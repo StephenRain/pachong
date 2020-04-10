@@ -25,7 +25,7 @@ public class TextFileExportHandler extends ResultExportHandler {
     @Override
     @SneakyThrows
     public void handle(PaginationResult paginationResult) {
-        String filePath = "G://" + DateUtil.nowFormat() + "-" + paginationResult.getPachong().getWeituofang() + ".txt";
+        String filePath = "G://" + DateUtil.nowFormat() + "-" + paginationResult.getPachong().getTargetSiteName() + ".txt";
         List<String> textString = new LinkedList<>();
         List<ExtractPageResult> pageResultList = paginationResult.getPageResultList();
         if (CollectionUtils.isNotEmpty(pageResultList)) {

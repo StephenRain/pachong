@@ -87,7 +87,7 @@ public class HtmlParser extends ExtractResultParser {
                         extractVal = element.text();
                     }
                 }
-                log.info("【" + extractPoint.getName() + "】" + "==解析==>" + extractVal);
+                log.info("【" + extractPoint.getName() + "】" + "====>【" + extractVal + "】");
                 extractPointResult.setName(extractPoint.getName());
                 extractPointResult.setValue(extractVal);
                 unitResult.addPointResult(extractPointResult);

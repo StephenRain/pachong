@@ -2,54 +2,44 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
+<script th:src="@{/layui/layui.all.js}"></script>
 <head>
     <meta charset="UTF-8">
-    <title>爬虫列表</title>
+    <title>数据采集列表</title>
     <style type="text/css">
-        table {
-            border: 1px solid black;
-            text-align: center;
-            border-collapse: collapse;
-        }
-
-        table thead th {
-            border: 1px solid black;
-        }
-        table tbody td {
-            border: 1px solid black;
-        }
     </style>
 </head>
 <body>
-爬虫列表
-<table>
+<table class="layui-table">
+    <thead>
     <tr>
-        <td>Id</td>
-        <td>url</td>
-        <td>请求方式</td>
-        <td>委托人</td>
-        <td>返回类型</td>
-        <td>操作</td>
+        <th>Id</th>
+        <th>目标网站</th>
+        <td>URL模板</td>
+        <td>状态</td>
+        <td>详情编辑</td>
+        <td>运行</td>
+        <td>采集结果</td>
+        <td>删除</td>
     </tr>
+    </thead>
+    <tbody>
     <tr th:each="pachong,stat:${list}">
-        <td th:text="${pachong['id']}" class="id"></td>
-        <td th:text="${pachong['url']}"></td>
-        <td th:text="${pachong['method']}"></td>
-        <td th:text="${pachong['weituofang']}"></td>
-        <td th:text="${pachong['responseType']}"></td>
-        <td><a th:href=@{'/admin/detail/view?id='+${pachong['id']}}>详情</a></td>
+        <td class="id" th:text="${pachong['id']}"></td>
+        <td th:text="${pachong['targetSiteName']}"></td>
+        <td th:text="${pachong['urlSmall']}"></td>
+        <td th:text="${pachong['status']}"></td>
+        <td><a th:href=@{'/admin/detail/view?id='+${pachong['id']}}>编辑</a></td>
+        <td><a th:href=@{'/admin/execute?id='+${pachong['id']}}>运行</a></td>
+        <td th:text="${pachong['resultPath']}">采集结果</td>
+        <td><a th:href=@{'/admin/delete?id='+${pachong['id']}}>删除</a></td>
     </tr>
+    </tbody>
 </table>
 </body>
-<script th:src="@{/layui/layui.all.js}"></script>
 <script>
-    //一般直接写在一个js文件中
-    layui.use(['layer', 'form'], function () {
-        var layer = layui.layer
-            , form = layui.form;
-
-        layer.msg('Hello World');
-    });
+    var layer = layui.layer
+        , form = layui.form;
 </script>
 
 </html>

@@ -1,15 +1,18 @@
 package com.puti.pachong.handler;
 
+import com.puti.pachong.entity.Pachong;
 import com.puti.pachong.entity.excel.ExcelSheetPO;
 import com.puti.pachong.entity.extract.ExtractPageResult;
 import com.puti.pachong.entity.extract.ExtractPointResult;
 import com.puti.pachong.entity.extract.ExtractUnitResult;
 import com.puti.pachong.entity.extract.PaginationResult;
+import com.puti.pachong.service.PachongService;
 import com.puti.pachong.util.DateUtil;
 import com.puti.pachong.util.ExcelUtil;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.LinkedList;
@@ -20,11 +23,23 @@ import java.util.stream.Collectors;
 @Component
 public class ExcelExportHandler extends ResultExportHandler {
 
+    private PachongService pachongService;
+
+    public ExcelExportHandler() {
+
+    }
+
+    @Autowired
+    public ExcelExportHandler(PachongService pachongService) {
+        this.pachongService = pachongService;
+    }
+
 
     @SneakyThrows
     @Override
     public void handle(PaginationResult paginationResult) {
-        String filePath = "G://" + DateUtil.nowFormat() + "-" + paginationResult.getPachong().getWeituofang() + ".xls";
+        Pachong pachong = paginationResult.getPachong();
+        String filePath = "G://" + DateUtil.nowFormat() + "-" + pachong.getTargetSiteName() + ".xls";
         List<ExtractPageResult> pageResultList = paginationResult.getPageResultList();
         if (CollectionUtils.isNotEmpty(pageResultList)) {
             List<List<String>> dataList = new LinkedList<>();
@@ -46,6 +61,9 @@ public class ExcelExportHandler extends ResultExportHandler {
             }
             ExcelUtil.createExcel(filePath, ExcelUtil.generateWorkbook(sheetPO.getSheetName(), sheetPO.getHeaders(), 0, 0, dataList, null));
             log.info("保存爬取数据至:" + filePath);
+            pachong.setStatus(2);
+            pachong.setResultPath(filePath);
+            pachongService.update(pachong);
         }
     }
 }
