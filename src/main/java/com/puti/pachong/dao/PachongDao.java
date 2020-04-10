@@ -19,9 +19,9 @@ public interface PachongDao {
     @Select("select * from pachong where id=#{id}")
     Pachong selectById(Integer id);
 
-    @Insert("insert into pachong (url,method,weituofang,responseType,extractUnit,saveType,headers) values(#{url},#{method},#{weituofang},#{responseType},#{extractUnit},#{saveType},#{headers})")
+    @Insert("insert into pachong (url,method,weituofang,responseType,extractUnit,saveType,headers,proxyFilePath) values(#{url},#{method},#{weituofang},#{responseType},#{extractUnit},#{saveType},#{headers},#{proxyFilePath})")
     void insert(Pachong pachong);
 
-    @Update("update pachong set url=#{url},method=#{method},weituofang=#{weituofang},responseType=#{responseType},extractUnit=#{extractUnit},saveType=#{saveType},headers=#{headers} where id=#{id}")
+    @Update("update pachong set url=#{url},method=#{method},weituofang=#{weituofang},responseType=#{responseType},extractUnit=#{extractUnit},saveType=#{saveType},headers=#{headers},proxyFilePath=#{proxyFilePath} where id=#{id}")
     void update(Pachong pachong);
 }

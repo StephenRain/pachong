@@ -12,7 +12,7 @@ import java.util.List;
  */
 @Data
 public class PaginationResult {
-
+    private int code;
     private Pachong pachong;
     private List<ExtractPageResult> pageResultList;
     private String msg;
@@ -20,7 +20,12 @@ public class PaginationResult {
     public static PaginationResult error(String msg) {
         PaginationResult result = new PaginationResult();
         result.setMsg(msg);
+        result.setCode(-1);
         return result;
+    }
+
+    public boolean isSuccess() {
+        return this.code >= 0;
     }
 
     public static PaginationResult success(List<ExtractPageResult> pageResultList) {

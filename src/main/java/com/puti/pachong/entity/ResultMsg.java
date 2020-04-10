@@ -1,9 +1,8 @@
 package com.puti.pachong.entity;
 
-import lombok.Data;
+import com.puti.pachong.entity.extract.PaginationResult;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 
 @Getter
 @Setter
@@ -26,6 +25,15 @@ public class ResultMsg {
         resultMsg.setMsg(msg);
         return resultMsg;
     }
+
+    public static ResultMsg error(PaginationResult result) {
+        ResultMsg resultMsg = new ResultMsg();
+        resultMsg.setCode(-1);
+        resultMsg.setMsg(resultMsg.getMsg());
+        resultMsg.setData(null);
+        return resultMsg;
+    }
+
 
     public static ResultMsg success() {
         ResultMsg resultMsg = new ResultMsg();

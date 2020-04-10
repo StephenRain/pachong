@@ -87,7 +87,7 @@ public class HttpRestRequest implements HttpRequester {
         } catch (Exception e) {
             log.error(e.getMessage());
         }
-
+        log.info("请求成功：" + url);
         return body;
     }
 }

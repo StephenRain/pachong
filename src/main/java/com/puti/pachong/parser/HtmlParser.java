@@ -44,7 +44,9 @@ public class HtmlParser extends ExtractResultParser {
             paginationResult.addPageResult(extractPageResult);
             extractPageResult.setCurrPage(currPage);
             List<ExtractPoint> pointList = extractUnit.getPoints();
-            Map<List<String>, ExtractPoint> pointSelectorMap = new HashMap<>();
+            // key：抓取点所有可能的选择器
+            // value：该抓取点
+            Map<List<String>, ExtractPoint> pointSelectorMap = new LinkedHashMap<>();
 
             for (ExtractPoint extractPoint : pointList) {
                 List<String> realSelectorList = TemplateUtil.parseTemplate(extractPoint.getSelector());
@@ -70,6 +72,7 @@ public class HtmlParser extends ExtractResultParser {
                 if (i % pointSelectors.size() == 0) {
                     unitResult = new ExtractUnitResult();
                     extractPageResult.addUnitResult(unitResult);
+                    log.info("=====================================");
                 }
                 ExtractPoint extractPoint = pointSelectorMap.get(pointSelectorMap.keySet().stream().filter((list) -> list.contains(realSelector)).findFirst().orElse(Collections.emptyList()));
                 ExtractPointResult extractPointResult = new ExtractPointResult();

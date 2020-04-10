@@ -33,6 +33,12 @@ public class Pachong {
      */
     private String headers;
 
+    /**
+     * 目前必须是文本文件格式，并且每个代理IP的ip和port是以\t分割
+     * 若此项不为空，则使用代理
+     */
+    private String proxyFilePath;
+
     public Pachong defaultVal() {
         if (StringUtils.isEmpty(this.getMethod())) {
             this.setMethod("GET");

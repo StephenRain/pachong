@@ -8,12 +8,14 @@ import com.puti.pachong.entity.extract.ExtractPagination;
 import com.puti.pachong.entity.extract.ExtractUnit;
 import com.puti.pachong.entity.extract.PaginationResult;
 import com.puti.pachong.entity.http.HttpRequest;
+import com.puti.pachong.entity.proxy.FreeProxy;
 import com.puti.pachong.handler.ExcelExportHandler;
 import com.puti.pachong.handler.ResultExportHandler;
 import com.puti.pachong.handler.TextFileExportHandler;
 import com.puti.pachong.http.HttpRequester;
 import com.puti.pachong.parser.HtmlParser;
 import com.puti.pachong.parser.ParserFactory;
+import com.puti.pachong.util.ProxyUtil;
 import com.puti.pachong.util.TemplateUtil;
 import io.micrometer.core.instrument.util.StringUtils;
 import lombok.SneakyThrows;
@@ -22,11 +24,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
 public class PachongService {
+    // 抓取页面的时间间隔
+    private final Integer REQUEST_INTERVAL = 1000 * 2;
 
     @Autowired
     private PachongDao pachongDao;
@@ -55,7 +63,6 @@ public class PachongService {
             pagination.getRealUrlList().addAll(urlList);
             // 将分页中的所有页面地址爬取下来
             for (String url : urlList) {
-                log.info("正在爬取:" + url);
                 String returnResult = "";
                 if (StringUtils.isEmpty(pachong.getMethod()) || "get".equalsIgnoreCase(pachong.getMethod())) {
                     returnResult = httpRequester.getRequest(HttpRequest.defaultGetRequest(url, pachong.getHeaderMap()));
@@ -64,7 +71,7 @@ public class PachongService {
                     }
                 }
                 pagination.getUrlToExtractVal().put(url, returnResult);
-                Thread.sleep(20);
+                Thread.sleep(1500);
             }
         }
 
@@ -81,18 +88,48 @@ public class PachongService {
         } else {
             resultExportHandler = new TextFileExportHandler();
         }
-
+        if (!paginationResult.isSuccess()) {
+            return ResultMsg.error(paginationResult);
+        }
         resultExportHandler.addExtractResult(paginationResult);
         resultExportHandler.handle();
         return ResultMsg.success(paginationResult);
     }
 
+    @SneakyThrows
     public boolean insert(Pachong pachong) {
+        checkProxy(pachong);
         pachongDao.insert(pachong);
         return true;
     }
 
+    @SneakyThrows
     public void update(Pachong pachong) {
+        checkProxy(pachong);
         pachongDao.update(pachong);
+    }
+
+    @SneakyThrows
+    private void checkProxy(Pachong pachong) {
+        String proxyFilePath = pachong.getProxyFilePath();
+        List<String> strings;
+        // 添加代理IP
+        if (StringUtils.isNotEmpty(proxyFilePath)) {
+            if (proxyFilePath.endsWith(".txt")) {
+                strings = Files.readAllLines(Paths.get(proxyFilePath));
+            } else if (proxyFilePath.contains(":")) {
+                strings = Arrays.asList(proxyFilePath.split("\r\n"));
+            } else {
+                return;
+            }
+            List<FreeProxy> freeProxyList = strings.stream().map((e) -> {
+                FreeProxy freeProxy = new FreeProxy();
+                String[] split = e.split("\t");
+                freeProxy.setIp(split[0]);
+                freeProxy.setPort(Integer.parseInt(split[1]));
+                return freeProxy;
+            }).collect(Collectors.toList());
+            List<FreeProxy> freeProxies = ProxyUtil.aliveProxyList(freeProxyList);
+        }
     }
 }
