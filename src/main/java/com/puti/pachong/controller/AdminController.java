@@ -1,6 +1,6 @@
 package com.puti.pachong.controller;
 
-import com.puti.pachong.entity.Pachong;
+import com.puti.pachong.entity.pachong.Pachong;
 import com.puti.pachong.service.PachongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,6 +39,11 @@ public class AdminController {
         }
         Pachong pachong = pachongService.selectById(id);
         return new ModelAndView("pachong/detail").addObject("pachong", pachong);
+    }
+
+    @RequestMapping("add/view")
+    public Object addPage() {
+        return new ModelAndView("pachong/add");
     }
 
     @RequestMapping("execute")

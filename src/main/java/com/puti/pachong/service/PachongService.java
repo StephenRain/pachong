@@ -2,12 +2,13 @@ package com.puti.pachong.service;
 
 import com.alibaba.fastjson.JSON;
 import com.puti.pachong.dao.PachongDao;
-import com.puti.pachong.entity.Pachong;
 import com.puti.pachong.entity.ResultMsg;
 import com.puti.pachong.entity.extract.ExtractPagination;
 import com.puti.pachong.entity.extract.ExtractUnit;
 import com.puti.pachong.entity.extract.PaginationResult;
 import com.puti.pachong.entity.http.HttpRequest;
+import com.puti.pachong.entity.pachong.Pachong;
+import com.puti.pachong.entity.pachong.PachongStatus;
 import com.puti.pachong.entity.proxy.FreeProxy;
 import com.puti.pachong.handler.ExcelExportHandler;
 import com.puti.pachong.handler.ResultExportHandler;
@@ -54,11 +55,11 @@ public class PachongService {
     @SneakyThrows
     public ResultMsg execute(Integer id) {
         Pachong pachong = this.selectById(id);
-        if (pachong.getStatus() == 1) {
+        if (PachongStatus.RUNNINT.getDesc().equals(pachong.getStatus())) {
             log.info("正在采集数据,稍后再试");
-            return ResultMsg.paramError("正在采集数据");
+            return ResultMsg.paramError("正在采集数据,稍后再试");
         }
-        pachong.setStatus(1);
+        pachong.setStatus(PachongStatus.RUNNINT.getDesc());
         pachongDao.update(pachong);
 
         ExtractPagination pagination = new ExtractPagination();
@@ -100,7 +101,7 @@ public class PachongService {
         }
         resultExportHandler.addExtractResult(paginationResult);
         resultExportHandler.handle();
-        pachong.setStatus(2);
+        pachong.setStatus(PachongStatus.DONE.getDesc());
         pachongDao.update(pachong);
         return ResultMsg.success(paginationResult);
     }

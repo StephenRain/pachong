@@ -1,7 +1,7 @@
 package com.puti.pachong.controller;
 
-import com.puti.pachong.entity.Pachong;
 import com.puti.pachong.entity.ResultMsg;
+import com.puti.pachong.entity.pachong.Pachong;
 import com.puti.pachong.service.PachongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

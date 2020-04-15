@@ -1,11 +1,11 @@
 package com.puti.pachong.handler;
 
-import com.puti.pachong.entity.Pachong;
 import com.puti.pachong.entity.excel.ExcelSheetPO;
 import com.puti.pachong.entity.extract.ExtractPageResult;
 import com.puti.pachong.entity.extract.ExtractPointResult;
 import com.puti.pachong.entity.extract.ExtractUnitResult;
 import com.puti.pachong.entity.extract.PaginationResult;
+import com.puti.pachong.entity.pachong.Pachong;
 import com.puti.pachong.service.PachongService;
 import com.puti.pachong.util.DateUtil;
 import com.puti.pachong.util.ExcelUtil;
@@ -61,7 +61,7 @@ public class ExcelExportHandler extends ResultExportHandler {
             }
             ExcelUtil.createExcel(filePath, ExcelUtil.generateWorkbook(sheetPO.getSheetName(), sheetPO.getHeaders(), 0, 0, dataList, null));
             log.info("保存爬取数据至:" + filePath);
-            pachong.setStatus(2);
+            pachong.setStatus("采集完成");
             pachong.setResultPath(filePath);
             pachongService.update(pachong);
         }

@@ -1,8 +1,8 @@
 package com.puti.pachong.parser;
 
 import com.alibaba.fastjson.JSON;
-import com.puti.pachong.entity.Pachong;
 import com.puti.pachong.entity.extract.*;
+import com.puti.pachong.entity.pachong.Pachong;
 import com.puti.pachong.util.TemplateUtil;
 import io.micrometer.core.instrument.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;

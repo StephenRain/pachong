@@ -51,6 +51,7 @@
                     <a href="javascript:">采集管理</a>
                     <dl class="layui-nav-child">
                         <dd><a href="/admin/list/view">采集列表</a></dd>
+                        <dd><a href="/admin/add/view">添加采集</a></dd>
                     </dl>
                 </li>
             </ul>
@@ -72,7 +73,7 @@
 <script th:src="@{/layui/layui.js}"></script>
 <script>
     //JavaScript代码区域
-    layui.use('element', function () {
+    layui.use(['element', 'form'], function () {
         var element = layui.element;
         var $ = layui.jquery;
         $("dd>a").click(function (e) {

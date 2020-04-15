@@ -1,6 +1,6 @@
 package com.puti.pachong.entity.extract;
 
-import com.puti.pachong.entity.Pachong;
+import com.puti.pachong.entity.pachong.Pachong;
 import lombok.Data;
 import org.apache.commons.collections4.CollectionUtils;
 

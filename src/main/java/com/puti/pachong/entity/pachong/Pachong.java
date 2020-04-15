@@ -1,4 +1,4 @@
-package com.puti.pachong.entity;
+package com.puti.pachong.entity.pachong;
 
 import io.micrometer.core.instrument.util.StringUtils;
 import lombok.Data;
@@ -19,12 +19,12 @@ public class Pachong {
     private String responseType = "HTML";
     private String extractUnit = "";
     /**
-     * 0: 刚创建
-     * 1：正在采集
-     * 2：采集完成
-     * 3：采集失败
+     * 0刚创建
+     * 1正在采集
+     * 2采集完成
+     * 3采集失败
      */
-    private int status;
+    private String status;
     /**
      * 爬取的结果 保存方式
      * 0：EXCEL

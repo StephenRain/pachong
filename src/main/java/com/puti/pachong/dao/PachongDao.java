@@ -1,6 +1,6 @@
 package com.puti.pachong.dao;
 
-import com.puti.pachong.entity.Pachong;
+import com.puti.pachong.entity.pachong.Pachong;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 

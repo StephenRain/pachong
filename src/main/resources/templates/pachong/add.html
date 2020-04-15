@@ -15,7 +15,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label">目标网站</label>
         <div class="layui-input-block">
-            <input class="layui-input" name="targetSiteName"/>
+            <input class="layui-input" name="targetSiteName" placeholder="要采集的网站名称，名字也可以随便起"/>
         </div>
     </div>
     <div class="layui-form-item layui-form-text">
@@ -35,20 +35,21 @@
     <div class="layui-form-item">
         <label class="layui-form-label">请求头</label>
         <div class="layui-input-block">
-            <textarea class="layui-textarea" name="headers"></textarea>
+            <textarea class="layui-textarea" name="headers" placeholder="从浏览器中直接拷贝的请求头信息,只要拷贝几个关键的头信息即可"></textarea>
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label">代理IP</label>
+        <label class="layui-form-label">使用代理</label>
         <div class="layui-input-block">
-            <input class="layui-input" name="proxyFilePath"/>
+            <input checked name="proxyFilePath" title="否" type="radio" value="0">
+            <input name="proxyFilePath" title="是" type="radio" value="1">
         </div>
     </div>
-
     <div class="layui-form-item">
         <label class="layui-form-label">保存方式</label>
         <div class="layui-input-block">
-            <input class="layui-input" name="saveType"/>
+            <input checked name="saveType" title="EXCEL" type="radio" value="EXCEL">
+            <input name="saveType" title="TXT文件" type="radio" value="TXT">
         </div>
     </div>
 
@@ -63,17 +64,17 @@
             <div class="layui-inlin">
                 <label class="layui-form-label">名称:</label>
                 <div class="layui-input-inline">
-                    <input class="name layui-input" type="text"/>
+                    <input class="name layui-input" placeholder="采集完定义的名称" type="text"/>
                 </div>
 
                 <label class="layui-form-label">选择器语法:</label>
                 <div class="layui-input-inline">
-                    <input class="selector layui-input" type="text"></input>
+                    <input class="selector layui-input" placeholder="对应的标签的selector" type="text">
                 </div>
 
                 <label class="layui-form-label">提取属性名:</label>
                 <div class="layui-input-inline">
-                    <input class="attrName layui-input" type="text" width="200px"></input>
+                    <input class="attrName layui-input" placeholder="若不需要提取标签属性，则不用填写" type="text" width="200px">
                 </div>
                 <div class="layui-inline">
                     <button class="add-btn layui-btn" onclick="addPoint();return false;">继续添加</button>
@@ -87,5 +88,8 @@
     </div>
     <br>
 </form>
+<script>
+    layui.use('form');
+</script>
 </body>
 </html>
