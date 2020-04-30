@@ -3,6 +3,7 @@ package com.puti.pachong.controller;
 import com.puti.pachong.entity.ResultMsg;
 import com.puti.pachong.entity.pachong.Pachong;
 import com.puti.pachong.service.PachongService;
+import com.puti.pachong.vos.PachongFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,9 +21,9 @@ public class PachongDetailController {
             return ResultMsg.paramError("参数不能为空");
         }
         if (pachong.getId() == null) {
-            pachongService.insert(pachong.defaultVal());
+            pachongService.insert(PachongFormat.formatPachong(pachong));
         } else {
-            pachongService.update(pachong.defaultVal());
+            pachongService.update(PachongFormat.formatPachong(pachong));
         }
         return "redirect:/admin/list/view";
     }

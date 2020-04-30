@@ -30,7 +30,7 @@ public class Pachong {
      * 0：EXCEL
      * 1：TXT 文件
      */
-    private int saveType = 0;
+    private String saveType;
 
     /**
      * 采集结果保存位置
@@ -53,22 +53,6 @@ public class Pachong {
      * 若此项不为空，则使用代理
      */
     private String proxyFilePath;
-
-    public Pachong defaultVal() {
-        if (StringUtils.isEmpty(this.getMethod())) {
-            this.setMethod("GET");
-        }
-        if (StringUtils.isEmpty(this.getTargetSiteName())) {
-            this.setTargetSiteName("自营");
-        }
-        if (StringUtils.isEmpty(this.getResponseType())) {
-            this.setResponseType("HTML");
-        }
-        if (this.getExtractUnit() == null) {
-            this.setExtractUnit("");
-        }
-        return this;
-    }
 
     /**
      * 将headers转换为Map类型

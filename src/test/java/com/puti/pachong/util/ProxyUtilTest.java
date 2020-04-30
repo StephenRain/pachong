@@ -8,8 +8,8 @@ class ProxyUtilTest {
     @Test
     void isAlive() {
         FreeProxy freeProxy = new FreeProxy();
-        freeProxy.setIp("14.20.235.88");
-        freeProxy.setPort(808);
+        freeProxy.setIp("99.79.83.80");
+        freeProxy.setPort(80);
         boolean alive = ProxyUtil.isAlive(freeProxy);
         System.out.println("alive = " + alive);
     }

@@ -65,3 +65,26 @@ var b = "body > div > div.user-container.pc-container > div.display-zone > div.n
 var e = "body > div > div.user-container.pc-container > div.display-zone > div.note-wrapper > div > div > div:nth-child(4) > div:nth-child(3) > div.note-info > div > div > div > img";
 var f = "body > div > div.user-container.pc-container > div.display-zone > div.note-wrapper > div > div > div:nth-child(3) > div:nth-child(3) > div.note-info > div > div > div > img";
 var lk = "body > div > div.user-container.pc-container > div.display-zone > div.note-wrapper > div > div > div:nth-child(3) > div:nth-child(2) > div.note-info > div > div > div > img";
+
+
+function t() {
+    var n = Array.prototype.slice.call(arguments);
+    try {
+        o && "function" == typeof o && o.apply(this, arguments);
+        var t = n.map(function (t) {
+            return qa(t, r)
+        });
+        return e.handleEvent ? e.handleEvent.apply(this, t) : e.apply(this, t)
+    } catch (e) {
+        throw Ba += 1, setTimeout(function () {
+            --Ba
+        }), qi(function (t) {
+            t.addEventProcessor(function (t) {
+                var e = y({}, t);
+                return r.mechanism && (To(e, void 0, void 0), Io(e, r.mechanism)), e.extra = y({}, e.extra, {
+                    arguments: n
+                }), e
+            }), Bi(e)
+        }), e
+    }
+}

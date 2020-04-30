@@ -9,6 +9,6 @@ import com.puti.pachong.entity.http.HttpRequest;
 public interface HttpRequester {
 
 
-    String getRequest(HttpRequest httpRequest);
+    String request(HttpRequest httpRequest);
 
 }

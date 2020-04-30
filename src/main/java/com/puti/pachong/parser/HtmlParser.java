@@ -1,6 +1,7 @@
 package com.puti.pachong.parser;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONPath;
 import com.puti.pachong.entity.extract.*;
 import com.puti.pachong.entity.pachong.Pachong;
 import com.puti.pachong.util.TemplateUtil;
@@ -30,8 +31,8 @@ public class HtmlParser extends ExtractResultParser {
         for (String originUrl : urlToExtractVal.keySet()) {
             currPage++;
             log.info("HTML解析器-正在解析:" + originUrl);
-            String extractValue = urlToExtractVal.get(originUrl);
-            if (StringUtils.isEmpty(extractValue)) {
+            String pageContent = urlToExtractVal.get(originUrl);
+            if (StringUtils.isEmpty(pageContent)) {
                 continue;
             }
             ExtractUnit extractUnit = JSON.parseObject(pachong.getExtractUnit(), ExtractUnit.class);
@@ -39,11 +40,32 @@ public class HtmlParser extends ExtractResultParser {
             if (extractUnit == null) {
                 return PaginationResult.error("抓取单元不能为空");
             }
-            Document doc = Jsoup.parse(extractValue);
+            List<ExtractPoint> pointList = extractUnit.getPoints();
+
             ExtractPageResult extractPageResult = new ExtractPageResult();
             paginationResult.addPageResult(extractPageResult);
             extractPageResult.setCurrPage(currPage);
-            List<ExtractPoint> pointList = extractUnit.getPoints();
+
+
+            // 简单判断 返回内容格式
+            if (pageContent.startsWith("{") || pageContent.startsWith("[")) {
+                // 说明json
+                pointList.stream().forEach((e) -> {
+                    String name = e.getName();
+                    String selector = e.getSelector();
+                    Object extract = JSONPath.extract(pageContent, selector);
+                    ExtractUnitResult unitResult = new ExtractUnitResult();
+                    extractPageResult.addUnitResult(unitResult);
+                    // 先不写了 todo 先把悟空问答自动答题写完再说，然后再改这个代码
+
+
+                });
+
+
+            }
+
+            Document doc = Jsoup.parse(pageContent);
+
             // key：抓取点所有可能的选择器
             // value：该抓取点
             Map<List<String>, ExtractPoint> pointSelectorMap = new LinkedHashMap<>();

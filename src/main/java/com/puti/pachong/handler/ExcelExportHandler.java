@@ -6,8 +6,8 @@ import com.puti.pachong.entity.extract.ExtractPointResult;
 import com.puti.pachong.entity.extract.ExtractUnitResult;
 import com.puti.pachong.entity.extract.PaginationResult;
 import com.puti.pachong.entity.pachong.Pachong;
+import com.puti.pachong.service.CaijiConfigService;
 import com.puti.pachong.service.PachongService;
-import com.puti.pachong.util.DateUtil;
 import com.puti.pachong.util.ExcelUtil;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -25,13 +25,16 @@ public class ExcelExportHandler extends ResultExportHandler {
 
     private PachongService pachongService;
 
+    private CaijiConfigService configService;
+
     public ExcelExportHandler() {
 
     }
 
     @Autowired
-    public ExcelExportHandler(PachongService pachongService) {
+    public ExcelExportHandler(PachongService pachongService, CaijiConfigService configSerivce) {
         this.pachongService = pachongService;
+        this.configService = configSerivce;
     }
 
 
@@ -39,7 +42,8 @@ public class ExcelExportHandler extends ResultExportHandler {
     @Override
     public void handle(PaginationResult paginationResult) {
         Pachong pachong = paginationResult.getPachong();
-        String filePath = "G://" + DateUtil.nowFormat() + "-" + pachong.getTargetSiteName() + ".xls";
+
+        String filePath = configService.getFirst().getExportDir() + "/" + pachong.getTargetSiteName() + ".xls";
         List<ExtractPageResult> pageResultList = paginationResult.getPageResultList();
         if (CollectionUtils.isNotEmpty(pageResultList)) {
             List<List<String>> dataList = new LinkedList<>();

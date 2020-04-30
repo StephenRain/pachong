@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 public class HttpClientRequest implements HttpRequester {
 
     @Override
-    public String getRequest(HttpRequest httpRequest) {
+    public String request(HttpRequest httpRequest) {
         HttpRes httpRes = HttpClientUtil.getInstace().request(httpRequest, httpRequest.isUseProxy());
         return httpRes.getContent();
     }

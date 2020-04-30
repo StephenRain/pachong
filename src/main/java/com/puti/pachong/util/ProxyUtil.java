@@ -18,12 +18,12 @@ public class ProxyUtil {
     public static boolean isAlive(FreeProxy freeProxy) {
         HttpRestRequest restRequest = new HttpRestRequest();
         HttpRequest request = new HttpRequest();
-        request.setUrl("https://www.baidu.com");
+        request.setUrl("https://www.google.com");
         request.setFreeProxy(freeProxy);
-        request.setConnectTimeOut(1000);
-        request.setReadTimeOut(1000);
+        request.setConnectTimeOut(3000);
+        request.setReadTimeOut(2000);
         try {
-            String res = restRequest.getRequest(request);
+            String res = restRequest.request(request);
             if (StringUtils.isEmpty(res)) {
                 return false;
             }

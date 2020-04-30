@@ -73,7 +73,7 @@ public class PachongService {
             for (String url : urlList) {
                 String returnResult = "";
                 if (StringUtils.isEmpty(pachong.getMethod()) || "get".equalsIgnoreCase(pachong.getMethod())) {
-                    returnResult = httpRequester.getRequest(HttpRequest.defaultGetRequest(url, pachong.getHeaderMap()));
+                    returnResult = httpRequester.request(HttpRequest.defaultGetRequest(url, pachong.getHeaderMap()));
                     if (StringUtils.isEmpty(returnResult)) {
                         continue;
                     }
@@ -91,7 +91,7 @@ public class PachongService {
         PaginationResult paginationResult = parser.parse(pagination);
 
         ResultExportHandler resultExportHandler;
-        if (pachong.getSaveType() == 0) {
+        if ("excel".equalsIgnoreCase(pachong.getSaveType())) {
             resultExportHandler = SpringUtil.getBean(ExcelExportHandler.class);
         } else {
             resultExportHandler = SpringUtil.getBean(TextFileExportHandler.class);

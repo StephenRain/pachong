@@ -2,6 +2,7 @@ package com.puti.pachong.controller;
 
 import com.puti.pachong.entity.pachong.Pachong;
 import com.puti.pachong.service.PachongService;
+import com.puti.pachong.vos.PachongFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,11 +25,7 @@ public class AdminController {
     @RequestMapping("/list/view")
     public Object list() {
         List<Pachong> list = pachongService.list();
-        list.forEach((e) -> {
-            if (e.getUrl().length() > 30) {
-                e.setUrlSmall(e.getUrl().substring(0, 30) + "...");
-            }
-        });
+        list.forEach(PachongFormat::formatPachong);
         return new ModelAndView("pachong/list").addObject("list", list);
     }
 
